@@ -7,9 +7,8 @@ const Middleware = {
     console.log('Checking required credentials');
     const {
       userId,
-      params,
     } = request;
-    console.log({ params, userId });
+    console.log({ userId });
 
     const token = request.headers.authorization;
 

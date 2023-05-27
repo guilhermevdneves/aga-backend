@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const config = require('config');
 const cors = require('cors');
 const UserRouter = require('../routers/user_router');
+const DateRouter = require('../routers/date_router');
 const HealthcheckRouter = require('../routers/health_check');
 const AuthenticationRouter = require('../routers/authentication_router');
 
@@ -18,6 +19,7 @@ class DSWA {
     this._app = express();
     this._app.use(express.json());
     this._app.use(cors(corsOptions));
+    this._app.use(DateRouter);
     this._app.use(UserRouter);
     this._app.use(HealthcheckRouter);
     this._app.use(AuthenticationRouter);

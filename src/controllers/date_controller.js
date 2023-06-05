@@ -21,12 +21,13 @@ const DateController = {
       return response.status(403).json(errorMessage);
     }
   },
-  async updateDate(request, response, next) {
+  async updateDate(request, response) {
     try {
       const {
         userId,
         date,
       } = request.body;
+      console.log(userId);
       const result = await Dates.findOne({ date });
 
       if (!result) {
@@ -38,7 +39,7 @@ const DateController = {
         return response.status(StatusCodes.OK).json(newData);
       // eslint-disable-next-line no-else-return
       } else {
-        result.reservedBy = undefined;
+        result.reservedBy = userId || undefined;
         await result.save();
         return response.status(StatusCodes.OK).json(result);
       }
@@ -47,7 +48,7 @@ const DateController = {
         status: StatusCodes.INTERNAL_SERVER_ERROR,
         message: error,
       };
-      return response.status(500).json( errorMessage );
+      return response.status(500).json(errorMessage);
     }
   },
   async removeFromQueueDate(request, response, next) {

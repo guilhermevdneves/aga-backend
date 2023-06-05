@@ -19,12 +19,17 @@ const UserSchema = new Schema({
     unique: true,
     required: true,
   },
-  email: {
+  number: {
     type: String,
   },
   password: {
     type: String,
     required: true,
+  },
+  admin: {
+    type: Boolean,
+    required: true,
+    default: false
   },
 });
 

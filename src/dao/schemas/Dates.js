@@ -14,11 +14,9 @@ const Dates = new Schema({
     unique: true,
     required: true,
   },
-  queue: [
-    {
-      type: String,
-    },
-  ],
+  reservedBy: {
+    type: String,
+  },
 });
 
 module.exports = mongoose.model('Dates', Dates);

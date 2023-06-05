@@ -1,13 +1,14 @@
 class User {
   constructor(data) {
     const {
-      id, username, name, email,
+      id, username, name, number, admin,
     } = data;
 
     this.id = id;
     this.username = username;
-    this.email = email;
+    this.number = number;
     this.name = name;
+    this.admin = admin;
   }
 
   toJSON() {
@@ -15,7 +16,8 @@ class User {
       id: this.id,
       username: this.username,
       name: this.name,
-      email: this.email,
+      number: this.number,
+      admin: this.admin,
     };
   }
 }

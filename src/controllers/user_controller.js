@@ -8,7 +8,7 @@ const AuthenticationController = {
       const {
         body: {
           name,
-          email,
+          number,
           username,
           password,
         },
@@ -25,11 +25,33 @@ const AuthenticationController = {
       await UserDAO.create({
         username,
         name,
-        email,
+        number,
         password: bcrypt.hashSync(password, sal),
       });
 
       return response.status(StatusCodes.OK).send();
+    } catch (error) {
+      const errorMessage = {
+        status: StatusCodes.INTERNAL_SERVER_ERROR,
+        message: error,
+      };
+      return next(errorMessage);
+    }
+  },
+  async getUserDetails(request, response, next) {
+    try {
+      const {
+        params: {
+          id,
+        },
+      } = request;
+      const user = await UserDAO.findOne({ _id: id });
+
+      if (!user) {
+        return response.status(403).json({ message: 'User doesnt exists' });
+      }
+
+      return response.status(StatusCodes.OK).json(user);
     } catch (error) {
       const errorMessage = {
         status: StatusCodes.INTERNAL_SERVER_ERROR,

@@ -1,19 +1,19 @@
 class Dates {
   constructor(data) {
     const {
-      id, date, queue,
+      id, date, reservedBy,
     } = data;
 
     this.id = id;
     this.date = date;
-    this.queue = queue;
+    this.reservedBy = reservedBy;
   }
 
   toJSON() {
     return {
       id: this.id,
       date: this.date,
-      queue: this.queue,
+      reservedBy: this.reservedBy,
     };
   }
 }

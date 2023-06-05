@@ -27,21 +27,19 @@ const DateController = {
         userId,
         date,
       } = request.body;
-      console.log(userId)
       const result = await Dates.findOne({ date });
-      console.log(result);
+
       if (!result) {
         const newData = await Dates.create({
           date,
-          queue: [userId],
+          reservedBy: userId,
         });
-        console.log('newData', newData);
+
         return response.status(StatusCodes.OK).json(newData);
       // eslint-disable-next-line no-else-return
       } else {
-        result.queue.push(userId);
+        result.reservedBy = undefined;
         await result.save();
-        console.log('result', result);
         return response.status(StatusCodes.OK).json(result);
       }
     } catch (error) {
